@@ -31,7 +31,7 @@ if word:
         with st.spinner('Thinking...'):
             response = model.generate_content(prompt)
             
-        st.success(#20c997)
+        st.success("Success!")
         
         # Display the Text results
         st.subheader(f"✨ Results for: **{word.capitalize()}**")

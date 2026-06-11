@@ -4,7 +4,12 @@ import urllib.parse
 
 # Configure the Gemini API (Replace with your actual key or use Streamlit Secrets)
 # For local testing, paste your key here. For cloud deployment, use st.secrets.
-API_KEY = st.secrets.get("GEMINI_API_KEY", "${{ secrets.GEMINI_API }}")
+#API_KEY = st.secrets.get("GEMINI_API_KEY", "${{ secrets.GEMINI_API }}")
+API_KEY = st.secrets.get("GEMINI_API")
+
+if not API_KEY:
+    st.error("GEMINI_API_KEY is not configured.")
+    st.stop()
 genai.configure(api_key=API_KEY)
 
 # App Title & Styling

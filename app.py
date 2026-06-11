@@ -23,7 +23,7 @@ word = st.text_input("Enter the Word of the Day:", value="").strip()
 if word:
     try:
         # Initialize Gemini Model
-        model = genai.GenerativeModel('gemini-3.5-flash')
+        model = genai.GenerativeModel('gemini-3.1-flash-lite')
         
         # Crafting a prompt tailored for a child's homework
         prompt = f"""

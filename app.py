@@ -86,7 +86,7 @@ if word:
         
         # FIX: We use a safe web-lookup tool that bypasses the cloud IP block completely
         # We look for simple, kid-friendly cartoon drawings of the word
-        search_query = f"{word} simple cartoon drawing clipart"
+        search_query = f"{word} - create cartoon drawing clipart for 8 Years old girl which she can draw for her homework"
         encoded_query = urllib.parse.quote(search_query)
         
         # This creates a solid, reliable image link that never hits a queue limit

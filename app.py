@@ -68,18 +68,18 @@ if word:
         
         st.markdown("---")
         
-        /*# DISPLAYING THE ACTUAL IMAGE
-        st.markdown('<p class="big-font">🎨 Look at this picture and draw it!</p>', unsafe_allow_html=True)
+        # DISPLAYING THE ACTUAL IMAGE
+        #st.markdown('<p class="big-font">🎨 Look at this picture and draw it!</p>', unsafe_allow_html=True)
         
         # Formatting the image prompt for a clean, easy-to-copy kid's drawing
-        image_prompt = f"a very simple child friendly line drawing of {word}, cute cartoon style, coloring book style, clear white background"
-        encoded_word = urllib.parse.quote(image_prompt)
+        #image_prompt = f"a very simple child friendly line drawing of {word}, cute cartoon style, coloring book style, clear white background"
+        #encoded_word = urllib.parse.quote(image_prompt)
         
         # Free image URL source
-        image_url = f"https://image.pollinations.ai/p/{encoded_word}?width=600&height=500&seed=15&nofeed=true"
+        #image_url = f"https://image.pollinations.ai/p/{encoded_word}?width=600&height=500&seed=15&nofeed=true"
         
         # This function forces Streamlit to render the actual image on screen
-        st.image(image_url, use_column_width=True)*/
+        #st.image(image_url, use_column_width=True)*/
         
     except Exception as e:
         if "429" in str(e) or "quota" in str(e).lower():

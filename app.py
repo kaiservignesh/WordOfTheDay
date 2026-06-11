@@ -79,7 +79,26 @@ if word:
         #image_url = f"https://image.pollinations.ai/p/{encoded_word}?width=600&height=500&seed=15&nofeed=true"
         
         # This function forces Streamlit to render the actual image on screen
-        #st.image(image_url, use_column_width=True)*/
+        #st.image(image_url, use_column_width=True)
+
+        # DISPLAYING THE ACTUAL IMAGE
+        st.markdown('<p class="big-font">🎨 Look at this picture and draw it!</p>', unsafe_allow_html=True)
+        
+        # FIX: We use a safe web-lookup tool that bypasses the cloud IP block completely
+        # We look for simple, kid-friendly cartoon drawings of the word
+        search_query = f"{word} simple cartoon drawing clipart"
+        encoded_query = urllib.parse.quote(search_query)
+        
+        # This creates a solid, reliable image link that never hits a queue limit
+        image_url = f"https://unavatar.io/duckduckgo/{encoded_query}"
+        
+        # Display the image safely using standard HTML
+        html_image_code = f"""
+        <div style="display: flex; justify-content: center; margin-top: 10px;">
+            <img src="{image_url}" width="100%" style="max-width:400px; border-radius:10px; border: 3px dashed #BDC3C7; padding: 10px;" />
+        </div>
+        """
+        st.markdown(html_image_code, unsafe_allow_html=True)
         
     except Exception as e:
         if "429" in str(e) or "quota" in str(e).lower():

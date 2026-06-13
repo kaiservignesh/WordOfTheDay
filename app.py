@@ -31,11 +31,11 @@ word = st.text_input("👉 Enter your homework word here:", value="").strip()
 
 if word:
     try:
-        # Using the faster, lighter model for rate-limit safety
+        # Initialize the free-tier model
         model = genai.GenerativeModel('gemini-3.1-flash-lite')
         
-        # Strict prompt for a 7-year-old child's level
-        prompt = f"""
+        # STRICT PROMPT: Enforces 1-2 word meaning and simple emojis
+        text_prompt = f"""
         The word is '{word}'. Provide homework help for a 7-year-old child.
         Follow these rules strictly and do not include any other conversational introduction or pro-tips:
         

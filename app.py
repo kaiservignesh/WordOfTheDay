@@ -45,22 +45,25 @@ if word:
         """
         
         with st.spinner('Thinking...'):
-            response = model.generate_content(prompt)
-            output = response.text
+            text_response = model.generate_content(text_prompt)
+            output = text_response.text
 
-        # Parsing the response safely
-        meaning_text = "Could not find meaning. Try again!"
-        sentence_text = "Could not make a sentence. Try again!"
+        meaning_text = "Try again!"
+        sentence_text = "Try again!"
+        drawing_text = "⭐ ✨ 🎈"
         
+        # Splitting the lines carefully
         for line in output.split("\n"):
             if line.startswith("MEANING:"):
                 meaning_text = line.replace("MEANING:", "").strip()
             elif line.startswith("SENTENCE:"):
                 sentence_text = line.replace("SENTENCE:", "").strip()
+            elif line.startswith("DRAWING:"):
+                drawing_text = line.replace("DRAWING:", "").strip()
 
+        # Display Text Results
         st.markdown(f"## ✨ Results for: **{word.capitalize()}**")
         
-        # Displaying tailored boxes for the child
         st.markdown('<p class="big-font">📝 Meaning:</p>', unsafe_allow_html=True)
         st.markdown(f'<div class="meaning-box">{meaning_text}</div>', unsafe_allow_html=True)
         

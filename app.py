@@ -81,31 +81,29 @@ if word:
         # This function forces Streamlit to render the actual image on screen
         #st.image(image_url, use_column_width=True)
 
-        # DISPLAYING THE ACTUAL IMAGE
-        st.markdown('<p class="big-font">🎨 Look at this picture and draw it!</p>', unsafe_allow_html=True)
+        # 2. GENERATE A CLEAN DRAWING LAYOUT (Bulletproof Free Method)
+        st.markdown('<p class="big-font">🎨 Look at this shape and draw it!</p>', unsafe_allow_html=True)
         
-        # Clean up the word for a safe live web lookup
-        search_term = f"{word} cartoon clipart"
-        encoded_term = urllib.parse.quote(search_term)
-        
-        # BULLETPROOF FIX: Use a completely open, high-reliability live source
-        # This points to a standard browser-friendly layout that grabs the direct image
-        image_url = f"https://images.weserv.nl/?url=https://imagedelivery.net/CLfkmk9WWh786N76w3gCHg/46b0a6fb-9a40-4100-84c4-7b98bfcc0300/public&w=400"
-        
-        # Alternative direct live fallback that bypasses cloud blocks beautifully:
-        # We construct a dynamic iframe or image container to render the illustration safely.
-        html_image_code = f"""
-        <div style="display: flex; flex-direction: column; align-items: center; margin-top: 10px;">
-            <img src="https://api.microlink.io?url=https%3A%2F%2Fwww.google.com%2Fsearch%3Ftbm%3Disch%26q%3D{encoded_term}&screenshot=true&embed=screenshot.url" 
-                 width="100%" 
-                 style="max-width:450px; border-radius:10px; border: 3px dashed #BDC3C7; padding: 5px;" 
-                 onerror="this.onerror=null; this.src='https://picsum.photos/400/300?random=1';" />
-            <p style="font-size: 14px; color: #7F8C8D; margin-top: 5px;">✏️ Drawing prompt helper for "{word}"</p>
-        </div>
+        image_prompt = f"""
+        Create a very simple, cute picture layout using common emojis or text characters to represent the word '{word}'.
+        Make it look like a clear outline that a 7-year-old child can look at and copy into their drawing notebook.
+        Keep it clean, organized, and beautifully spaced out. Do not include long paragraphs of instructions.
         """
-        st.markdown(html_image_code, unsafe_allow_html=True)
         
+        with st.spinner('Creating drawing idea...'):
+            img_response = model.generate_content(image_prompt)
+            sketch_output = img_response.text
+        
+        # Display it in a clean, beautiful drawing board box
+        st.markdown(f"""
+        <div style="background-color: #FAFAFA; border: 3px dashed #BDC3C7; padding: 20px; border-radius: 10px; text-align: center; font-size: 20px; font-family: monospace; white-space: pre-wrap; line-height: 1.6;">
+            {sketch_output}
+        </div>
+        <p style="text-align: center; font-size: 14px; color: #7F8C8D; margin-top: 5px;">✏️ Copy this fun design into your drawing notebook!</p>
+        """, unsafe_allow_html=True)
+            
     except Exception as e:
+        # Gracefully catch Google's 5-requests-per-minute limit
         if "429" in str(e) or "quota" in str(e).lower():
             st.warning("⏳ The app is thinking a little too fast! Please wait 30 seconds and try typing the word again.")
         else:

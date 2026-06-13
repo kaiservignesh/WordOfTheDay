@@ -82,29 +82,16 @@ if word:
         # This function forces Streamlit to render the actual image on screen
         #st.image(image_url, use_column_width=True)
 
-        # 2. GENERATE A CLEAN DRAWING LAYOUT (Bulletproof Free Method)
-        st.markdown('<p class="big-font">🎨 Look at this shape and draw it!</p>', unsafe_allow_html=True)
-        
-        image_prompt = f"""
-        Create a very simple, cute picture layout using common emojis or text characters to represent the word '{word}'.
-        Make it look like a clear outline that a 7-year-old child can look at and copy into their drawing notebook.
-        Keep it clean, organized, and beautifully spaced out. Do not include long paragraphs of instructions.
-        """
-        
-        with st.spinner('Creating drawing idea...'):
-            img_response = model.generate_content(image_prompt)
-            sketch_output = img_response.text
-        
-        # Display it in a clean, beautiful drawing board box
+        # Display the drawing icons
+        st.markdown('<p class="big-font">🎨 Look at these pictures and draw them!</p>', unsafe_allow_html=True)
         st.markdown(f"""
-        <div style="background-color: #FAFAFA; border: 3px dashed #BDC3C7; padding: 20px; border-radius: 10px; text-align: center; font-size: 20px; font-family: monospace; white-space: pre-wrap; line-height: 1.6;">
-            {sketch_output}
+        <div style="background-color: #FAFAFA; border: 3px dashed #BDC3C7; padding: 30px; border-radius: 10px; text-align: center; font-size: 50px; letter-spacing: 15px;">
+            {drawing_text}
         </div>
-        <p style="text-align: center; font-size: 14px; color: #7F8C8D; margin-top: 5px;">✏️ Copy this fun design into your drawing notebook!</p>
+        <p style="text-align: center; font-size: 14px; color: #7F8C8D; margin-top: 10px;">✏️ Pick one or two of these shapes to draw in your notebook!</p>
         """, unsafe_allow_html=True)
             
     except Exception as e:
-        # Gracefully catch Google's 5-requests-per-minute limit
         if "429" in str(e) or "quota" in str(e).lower():
             st.warning("⏳ The app is thinking a little too fast! Please wait 30 seconds and try typing the word again.")
         else:

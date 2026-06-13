@@ -40,7 +40,7 @@ if word:
         Follow these rules strictly and do not include any other conversational introduction or pro-tips:
         
         MEANING: [Provide exactly a one-word or two-word definition that a 7-year-old understands. No more than two words.]
-        SENTENCE: [Write one very short, simple sentence using the word that a child can easily copy.]
+        SENTENCE: [Write one easy, fun sentence using the word that a child can easily read and copy.]
         DRAWING: [Provide 3 to 4 simple emojis spaced out that match the word perfectly for a child to look at and draw.]
         """
         

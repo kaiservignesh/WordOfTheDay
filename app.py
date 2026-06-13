@@ -36,11 +36,12 @@ if word:
         
         # Strict prompt for a 7-year-old child's level
         prompt = f"""
-        The word is '{word}'. Provide homework help for a 7-year-old (1st/2nd grade).
-        Respond ONLY in this exact format, with no extra text or conversational chatter:
+        The word is '{word}'. Provide homework help for a 7-year-old child.
+        Follow these rules strictly and do not include any other conversational introduction or pro-tips:
         
-        MEANING: [Write a very short, simple definition using words a 7-year-old knows. Max 15 words.]
-        SENTENCE: [Write one easy, fun sentence using the word that a child can easily read and copy.]
+        MEANING: [Provide exactly a one-word or two-word definition that a 7-year-old understands. No more than two words.]
+        SENTENCE: [Write one very short, simple sentence using the word that a child can easily copy.]
+        DRAWING: [Provide 3 to 4 simple emojis spaced out that match the word perfectly for a child to look at and draw.]
         """
         
         with st.spinner('Thinking...'):
